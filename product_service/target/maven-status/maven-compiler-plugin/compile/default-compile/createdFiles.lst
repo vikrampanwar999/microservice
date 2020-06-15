@@ -1,0 +1,14 @@
+com\igoujime\ecom\product\kafka\ProductConsumer.class
+com\igoujime\ecom\product\repository\CategoryRepository.class
+com\igoujime\ecom\product\service\impl\ProductServiceImpl.class
+com\igoujime\ecom\product\service\ProductService.class
+com\igoujime\ecom\product\controller\CategoryController.class
+com\igoujime\ecom\product\controller\ProductController.class
+com\igoujime\ecom\product\entity\Category.class
+com\igoujime\ecom\product\entity\Product.class
+com\igoujime\ecom\product\kafka\KeySet.class
+com\igoujime\ecom\product\ProductApplication.class
+com\igoujime\ecom\product\service\CategoryService.class
+com\igoujime\ecom\product\repository\ProductRepository.class
+com\igoujime\ecom\product\mapper\JsonMapperWrapper.class
+com\igoujime\ecom\product\service\impl\CategoryServiceImpl.class

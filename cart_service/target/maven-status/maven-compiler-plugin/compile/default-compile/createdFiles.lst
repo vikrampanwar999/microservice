@@ -1,0 +1,17 @@
+com\igoujime\ecom\cart\kafka\KafkaCartService.class
+com\igoujime\ecom\cart\kafka\CartConsumer.class
+com\igoujime\ecom\cart\service\impl\ProductServiceImpl.class
+com\igoujime\ecom\cart\entity\Product.class
+com\igoujime\ecom\cart\entity\Category.class
+com\igoujime\ecom\cart\service\CartService.class
+com\igoujime\ecom\cart\kafka\KafkaCartServiceImpl.class
+com\igoujime\ecom\cart\repository\ProductRepository.class
+com\igoujime\ecom\cart\entity\Cart.class
+com\igoujime\ecom\cart\kafka\KeySet.class
+com\igoujime\ecom\cart\mapper\JsonMapperWrapper.class
+com\igoujime\ecom\cart\service\ProductService.class
+com\igoujime\ecom\cart\controller\CartController.class
+com\igoujime\ecom\cart\entity\CartState.class
+com\igoujime\ecom\cart\service\impl\CartServiceImpl.class
+com\igoujime\ecom\cart\repository\CartRepository.class
+com\igoujime\ecom\cart\CartApplication.class

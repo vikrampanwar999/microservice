@@ -1,0 +1,15 @@
+com\igoujime\ecom\checkout\service\CheckoutService.class
+com\igoujime\ecom\checkout\controller\CheckoutController.class
+com\igoujime\ecom\checkout\repository\CheckoutRepository.class
+com\igoujime\ecom\checkout\kafka\KafkaCartService.class
+com\igoujime\ecom\checkout\mapper\JsonMapperWrapper.class
+com\igoujime\ecom\checkout\CheckoutApplication.class
+com\igoujime\ecom\checkout\entity\Checkout.class
+com\igoujime\ecom\checkout\entity\CheckoutStatus.class
+com\igoujime\ecom\checkout\service\impl\CartServiceImpl.class
+com\igoujime\ecom\checkout\kafka\KafkaCartServiceImpl.class
+com\igoujime\ecom\checkout\kafka\KeySet.class
+com\igoujime\ecom\checkout\repository\CartRepository.class
+com\igoujime\ecom\checkout\entity\Cart.class
+com\igoujime\ecom\checkout\service\CartService.class
+com\igoujime\ecom\checkout\service\impl\CheckoutServiceImpl.class

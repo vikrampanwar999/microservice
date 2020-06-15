@@ -1,0 +1,207 @@
+version: '3'
+
+services:
+
+# zookeeper & kafka
+    zookeeper:
+        image: wurstmeister/zookeeper
+        container_name: zookeeper
+        restart: always
+        ports:
+          - 2181:2181
+
+    kafka:
+        image: wurstmeister/kafka
+        container_name: kafka
+        restart: always
+        depends_on:
+          - zookeeper
+        links:
+          - zookeeper:zookeeper
+        ports:
+          - 9092:9092
+        environment:
+          - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+          - KAFKA_ADVERTISED_HOST_NAME=kafka
+          - KAFKA_ADVERTISED_PORT=9092
+          - KAFKA_CREATE_TOPICS=PRODUCT:1:1,CART:1:1,CHECKOUT:1:1
+          - KAFKA_BROKER_ID=1
+    
+    # services
+    ecom-discovery-ms:
+        image: ecom-discovery-server:latest
+        container_name: ecom-discovery-server
+        restart: always
+        ports:
+          - 8761:8761
+
+# services
+    ecom-product-ms:
+        image: ecom-product:latest
+        container_name: ecom-product
+        depends_on:
+        - ecom-product-mysql
+        - ecom-discovery-ms
+        - kafkaversion: '3'
+
+services:
+
+# zookeeper & kafka
+    zookeeper:
+        image: wurstmeister/zookeeper
+        container_name: zookeeper
+        restart: always
+        ports:
+          - 2181:2181
+
+    kafka:
+        image: wurstmeister/kafka
+        container_name: kafka
+        restart: always
+        depends_on:
+          - zookeeper
+        links:
+          - zookeeper:zookeeper
+        ports:
+          - 9092:9092
+        environment:
+          - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+          - KAFKA_ADVERTISED_HOST_NAME=kafka
+          - KAFKA_ADVERTISED_PORT=9092
+          - KAFKA_CREATE_TOPICS=PRODUCT:1:1,CART:1:1,CHECKOUT:1:1
+          - KAFKA_BROKER_ID=1
+    
+    # services
+    ecom-discovery-ms:
+        image: ecom-discovery-server:latest
+        container_name: ecom-discovery-server
+        restart: always
+        ports:
+          - 8761:8761
+    
+    ecom-gateway-ms:
+        image: ecom-api-gateway:latest
+        container_name: ecom-api-gateway
+        ports:
+          - 8080:8080
+        restart: always
+        depends_on:
+          - ecom-discovery-ms
+        environment:
+            - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://ecom-discovery-ms:8761/eureka/
+           
+
+# services
+    ecom-user-ms:
+        image: ecom-user:latest
+        container_name: ecom-user
+        depends_on:
+        - ecom-user-mysql
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-user-mysql:3306/ecom-user?useUnicode=true&characterEncoding=utf8&useSSL=false
+        ports:
+            - 8081:8081
+
+    ecom-user-mysql:
+        image: mysql:5.7.19
+        container_name: ecom-user-mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=mostapha
+            - MYSQL_PASSWORD=mostapha
+            - MYSQL_DATABASE=ecom-user
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+      
+    ecom-product-ms:
+        image: ecom-product:latest
+        container_name: ecom-product
+        depends_on:
+        - ecom-product-mysql
+        - ecom-discovery-ms
+        - kafka
+        links:
+        - kafka:kafka
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-product-mysql:3306/ecom-product?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://ecom-discovery-ms:8761/eureka/
+        ports:
+            - 8100-8200:8100-8200
+
+    ecom-product-mysql:
+        image: mysql:5.7.19
+        container_name: ecom-product-mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=mostapha
+            - MYSQL_PASSWORD=mostapha
+            - MYSQL_DATABASE=ecom-product
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+
+    ecom-cart-ms:
+        image: ecom-cart:latest
+        container_name: ecom-cart
+        depends_on:
+        - ecom-cart-mysql
+        - ecom-discovery-ms
+        - kafka
+        links:
+        - kafka:kafka
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-cart-mysql:3306/ecom-cart?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://ecom-discovery-ms:8761/eureka/
+        ports:
+            - 8201-8300:8201-8300
+
+    ecom-cart-mysql:
+        image: mysql:5.7.19
+        container_name: ecom-cart-mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=mostapha
+            - MYSQL_PASSWORD=mostapha
+            - MYSQL_DATABASE=ecom-cart
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+     
+    ecom-checkout-ms:
+        image: ecom-checkout:latest
+        container_name: ecom-checkout
+        depends_on:
+        - ecom-checkout-mysql
+        - ecom-discovery-ms
+        - kafka
+        links:
+        - kafka:kafka
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-checkout-mysql:3306/ecom-checkout?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://ecom-discovery-ms:8761/eureka/
+        ports:
+            - 8301-8400:8301-8400
+
+    ecom-checkout-mysql:
+        image: mysql:5.7.19
+        container_name: ecom-checkout-mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=mostapha
+            - MYSQL_PASSWORD=mostapha
+            - MYSQL_DATABASE=ecom-checkout
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+        links:
+        - kafka:kafka
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-product-mysql:3306/ecom-product?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://ecom-discovery-ms:8761/eureka/
+        ports:
+            - 8100-8200:8100-8200
+
+    ecom-product-mysql:
+        image: mysql:5.7.19
+        container_name: ecom-product-mysql
+        ports:
+          - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=mostapha
+            - MYSQL_PASSWORD=mostapha
+            - MYSQL_DATABASE=ecom-product
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8

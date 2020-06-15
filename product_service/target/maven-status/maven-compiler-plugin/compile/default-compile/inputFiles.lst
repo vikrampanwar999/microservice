@@ -1,0 +1,14 @@
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\repository\ProductRepository.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\service\impl\ProductServiceImpl.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\kafka\ProductConsumer.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\service\impl\CategoryServiceImpl.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\controller\ProductController.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\ProductApplication.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\repository\CategoryRepository.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\service\CategoryService.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\entity\Product.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\kafka\KeySet.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\entity\Category.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\controller\CategoryController.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\mapper\JsonMapperWrapper.java
+C:\Users\vikram\Desktop\ecom-ms\product_service\src\main\java\com\igoujime\ecom\product\service\ProductService.java
