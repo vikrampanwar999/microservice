@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: ecom-config-server
+Implementation-Version: 0.0.1
+Built-By: vikram
+Implementation-Vendor-Id: com.igoujime.ecom.config
+Build-Jdk: 1.8.0_201
+Implementation-URL: http://projects.spring.io/spring-boot/ecom-config-
+ server/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
